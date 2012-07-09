@@ -2,6 +2,9 @@
 
 This will create a little widget with a button that sends the user and some information over to the travelavenue login page.
 
+### The Important Stuff
+Drop this in to a page, if it's not clear enough there is an example in layout.html
+
 ```
 <div>
   lots of sexy html
