@@ -15,6 +15,18 @@
         }
       }
     }(),
+    domain: function(){
+      var environment = _ta.taScript.getAttribute('data-environment') || 'production';
+      
+      if(environment == 'production'){
+        return 'http://travelavenue.fr';
+      }else if(environment == 'staging'){
+        return 'http://travelavenue.staging.com';
+      }else if(environment == 'development'){
+        return 'http://travelavenue.local.com';
+      }
+
+    },
     // make: build an HTML element given a hash structure
     //  example: div_element = _ta.make({div: {id: 'id'}});
     make: function(obj) {
@@ -35,6 +47,20 @@
         }
       }
       return createdObject;
+    },
+    loadLoginFrame: function(){
+      var url = _ta.domain() + _ta.pp.landing_path + '?' + _ta.buildQueryString(_ta.pp.product);
+      a = url;
+      window.open(url, _ta.pp.loginTitle, config='width=660, height=724, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no')
+    },
+    buildQueryString: function(params){
+      var query_variables = [];
+      for (var p in params){
+        if (params.hasOwnProperty(p)) {
+          query_variables.push(p + "=" + encodeURIComponent(params[p]));
+        }
+      }
+      return query_variables.join('&');
     },
     setContainerStyle: function(){
       var sheet,    // Stylesheet element
@@ -72,6 +98,15 @@
           className: _ta.pp.gid + '_button_container'
         }
       });
+
+      button = _ta.make({
+        button: {
+          className: _ta.pp.gid + '_add_to_trip_button',
+          innerHTML: _ta.pp.msg.addToTrip
+        }
+      });
+      buttonContainer.appendChild(button);
+      
       helpContainer = _ta.make({
         div: {
           className: _ta.pp.gid + '_help_container',
@@ -81,23 +116,32 @@
       buttonContainer.appendChild(helpContainer);
 
       // Add button container to page
-      _ta.taScript.parentNode.insertBefore(buttonContainer, _ta.pp.taScript);
+      _ta.taScript.parentNode.insertBefore(buttonContainer, _ta.taScript);
+      
       // Add events to button
+      button.addEventListener('click', _ta.loadLoginFrame, false);
+      
       // Add styles to container
       _ta.setContainerStyle();
     }
   }
 
   _ta.init();
+  window.bai = _ta.pp;
 })(window, document, navigator, {
   gid: "TA_TRIP_WIDGET", //+ (new Date).getTime(), // If we want this to be unoverridable then add the timestamp
+  landing_path: '/register/',
+  product: window._ta.product,
   msg:{
-    hoverHelpText: "Sauvegardez cette addresse en click sur Travelavenue.com, votre carnet de voyage en line. Votre vous aide a centraliser et sauvegardez toutes vos trouvailles sur tous les sites web en un seul lieu."
+    addToTrip: "Ajouter à mon carnet de voyage",
+    hoverHelpText: "Sauvegardez cette addresse en click sur Travelavenue.com, votre carnet de voyage en line. Votre vous aide a centraliser et sauvegardez toutes vos trouvailles sur tous les sites web en un seul lieu.",
+    loginTitle: "Travelavenue - Carnet de Voyage"
   },
   // # will be replaced by '.' + _ta.gid
   styles:[
-    '#_button_container {min-height: 100px; width: 200px; position: relative; border: solid black 1px;}',
-    '#_help_container { bottom: -100px; left:0; padding: 5px; position: absolute; background: #f1f1f1; border: solid 3px #111; width: 300px; display:none;border: solid 2px #3295cf;-moz-border-radius: 3px; border-radius: 3px; box-shadow: 1px 1px 3px #999;}',
+    '#_add_to_trip_button { text-align: left; background: #0084ca; width: 142px; height: 40px;}',
+    '#_button_container { width: 200px; position: relative; border: solid black 1px;}',
+    '#_help_container { top: 42px; left:0; padding: 5px; position: absolute; background: #f1f1f1; border: solid 3px #111; width: 300px; display:none;border: solid 2px #3295cf;-moz-border-radius: 3px; border-radius: 3px; box-shadow: 1px 1px 3px #999;}',
     '#_button_container:hover #_help_container {display:block;}'
   ]
 });

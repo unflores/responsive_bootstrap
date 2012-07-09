@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Widget Time!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Widget Example">
+    <meta name="author" content="M LeFleur">
 
     <!-- Le styles -->
     <link href="bootstrap.css" rel="stylesheet">
@@ -46,12 +46,13 @@
             
             <script>
               _ta = typeof _ta == 'undefined' ? {} : _ta;
-              _ta.charme_product = {
+              _ta.product = {
                 title: 'some title',
                 description: 'here is a small description about the product hopefully',
                 address: '1024 some address',
                 telephone: '123-456-7890',
-                product_id: '123456'
+                product_id: '123456',
+                affiliate_type: 'charme_traditions'
               }
             </script>
             <div class='span4'>
@@ -68,7 +69,7 @@
       </div>
     </div>
     <div class='spacer'></div>
-    <script src='travelavenue-trip-widget.js' type='text/javascript'></script>
+    <script src='travelavenue-trip-widget.js' data-environment='development' type='text/javascript'></script>
     <div class="container-fluid">
       <h1>Bootstrap starter template</h1>
       <div class='row-fluid'>
