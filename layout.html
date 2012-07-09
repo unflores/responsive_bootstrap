@@ -44,9 +44,17 @@
               <a class="brand" href="#">Travelavenue</a>
             </div>
             
-            
-            <div class='span4' id='ta_trip_container'>
-              <script src='travelavenue-trip-widget.js' type='text/javascript'></script>
+            <script>
+              _ta = typeof _ta == 'undefined' ? {} : _ta;
+              _ta.charme_product = {
+                title: 'some title',
+                description: 'here is a small description about the product hopefully',
+                address: '1024 some address',
+                telephone: '123-456-7890',
+                product_id: '123456'
+              }
+            </script>
+            <div class='span4'>
               <ul class="nav nav-collapse pull-right">
                 <li class><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -60,7 +68,7 @@
       </div>
     </div>
     <div class='spacer'></div>
-
+    <script src='travelavenue-trip-widget.js' type='text/javascript'></script>
     <div class="container-fluid">
       <h1>Bootstrap starter template</h1>
       <div class='row-fluid'>
