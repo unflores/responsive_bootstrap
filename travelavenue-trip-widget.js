@@ -86,7 +86,9 @@
     },
     init: function(){
       var buttonContainer,
-          helpContainer;
+          helpContainer,
+          button_wrapper,
+          button;
 
       // Add shortcuts
       _ta.dd.b = _ta.dd.getElementsByTagName('body')[0];
@@ -99,13 +101,20 @@
         }
       });
 
+      buttonWrapper = _ta.make({
+        span: {
+          className: _ta.pp.gid + '_button_wrapper'
+        }
+      });
+      buttonContainer.appendChild(buttonWrapper);
+
       button = _ta.make({
-        button: {
+        span: {
           className: _ta.pp.gid + '_add_to_trip_button',
           innerHTML: _ta.pp.msg.addToTrip
         }
       });
-      buttonContainer.appendChild(button);
+      buttonWrapper.appendChild(button);
       
       helpContainer = _ta.make({
         div: {
@@ -120,7 +129,7 @@
       
       // Add events to button
       button.addEventListener('click', _ta.loadLoginFrame, false);
-      
+
       // Add styles to container
       _ta.setContainerStyle();
     }
@@ -133,15 +142,16 @@
   landing_path: '/register/',
   product: window._ta.product,
   msg:{
-    addToTrip: "Ajouter à mon carnet de voyage",
+    addToTrip: "Ajouter à mon voyage",
     hoverHelpText: "Sauvegardez cette addresse en click sur Travelavenue.com, votre carnet de voyage en line. Votre vous aide a centraliser et sauvegardez toutes vos trouvailles sur tous les sites web en un seul lieu.",
     loginTitle: "Travelavenue - Carnet de Voyage"
   },
   // # will be replaced by '.' + _ta.gid
   styles:[
-    '#_add_to_trip_button { text-align: left; background: #0084ca; width: 142px; height: 40px;}',
-    '#_button_container { width: 200px; position: relative; border: solid black 1px;}',
-    '#_help_container { top: 42px; left:0; padding: 5px; position: absolute; background: #f1f1f1; border: solid 3px #111; width: 300px; display:none;border: solid 2px #3295cf;-moz-border-radius: 3px; border-radius: 3px; box-shadow: 1px 1px 3px #999;}',
+    '#_button_wrapper {display: inline-block; height: 25px;background: #0094da;border: 1px #1b769f;-moz-border-radius: 4px; border-radius: 4px;color: #ffeff6;box-shadow: 1px 1px 1px #999; cursor: pointer;}',
+    '#_add_to_trip_button { padding: 0 4px;background: url("icon_small_logo.png") no-repeat 3px 3px; text-align: left; height: 23px; line-height:25px;-moz-border-radius: 4px; border-radius: 4px;box-shadow: inset 0px 0px 3px #fff; display:inline-block;margin:1px; text-align:center;font-size: 12px;text-indent:20px;}',
+    '#_button_container { width: 200px; position: relative; font-family: Arial;}',
+    '#_help_container { top: 27px; left:0; padding: 5px; position: absolute; background: #f1f1f1; border: solid 3px #111; width: 300px; display:none;border: solid 2px #3295cf;-moz-border-radius: 3px; border-radius: 3px; box-shadow: 1px 1px 3px #999;}',
     '#_button_container:hover #_help_container {display:block;}'
   ]
 });
